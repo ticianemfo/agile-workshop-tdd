@@ -3,6 +3,7 @@ package br.com.caelum.tdd.exercicio1;
 import static br.com.caelum.tdd.exercicio1.Position.DBA;
 import static br.com.caelum.tdd.exercicio1.Position.DEVELOPER;
 import static br.com.caelum.tdd.exercicio1.Position.TESTER;
+import static br.com.caelum.tdd.exercicio1.Position.MANAGER;
 
 import static org.junit.Assert.assertEquals;
 
@@ -77,7 +78,34 @@ public class SalaryCalculatorTest {
 		assertEquals(1000.0 * 0.85, salario, 0.000001);
 	}
 	
+	@Test
+	public void deveRetornar6000MenosImpostosDe20PorCentoSeGerenteGanhaMaisDe5000(){
+		Employee gerente = umFuncionario(MANAGER, comSalarioBase(6000.0));
 		
+		double salary = calculator.calculate(gerente);
+		
+		assertEquals(6000.0 * 0.8, salary, 0.000001);
+	}
+	
+	@Test
+	public void deveRetornar5000MenosImpostosDe20PorCentoSeGerenteGanhaMaisDe5000(){
+		Employee gerente = umFuncionario(MANAGER, comSalarioBase(5000.0));
+		
+		double salary = calculator.calculate(gerente);
+		
+		assertEquals(5000.0 * 0.8, salary, 0.000001);
+	}
+		
+	
+	@Test
+	public void deveRetornar4000MenosImpostosDe15PorCentoSeGerenteGanhaMenosDe5000(){
+		Employee gerente = umFuncionario(MANAGER, comSalarioBase(4000.0));
+		
+		double salary = calculator.calculate(gerente);
+		
+		assertEquals(4000.0 * 0.85, salary, 0.000001);
+	}
+	
 	private Employee umFuncionario(Position cargo, double salario) {
 		Employee funcionario = new Employee();
 		funcionario.setName("Martin Fowler");
